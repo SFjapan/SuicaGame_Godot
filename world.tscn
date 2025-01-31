@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cm2b1yeyq8ycl"]
+[gd_scene load_steps=35 format=3 uid="uid://cm2b1yeyq8ycl"]
 
 [ext_resource type="Texture2D" uid="uid://bptt6c7m5gbu4" path="res://Assets/img/box.png" id="1_ie5ku"]
 [ext_resource type="Texture2D" uid="uid://c8lj2dxwobdu7" path="res://Assets/img/backgrpund.png" id="1_rmhle"]
@@ -30,12 +30,16 @@
 [ext_resource type="Texture2D" uid="uid://id16y13tofl5" path="res://Assets/img/watermelon.png" id="28_hhh2r"]
 [ext_resource type="Script" path="res://firebase.gd" id="29_q5xjl"]
 [ext_resource type="Script" path="res://Ranking.gd" id="30_nhiuw"]
+[ext_resource type="FontFile" uid="uid://cg2l16bndf77j" path="res://Assets/fonts/NotoSansJP-VariableFont_wght.ttf" id="31_1vslw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uoak"]
 size = Vector2(22, 526.001)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkgbp"]
 size = Vector2(411, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_whbqp"]
+size = Vector2(400, 20)
 
 [node name="World" type="Node2D"]
 position = Vector2(-1, 1)
@@ -54,21 +58,28 @@ position = Vector2(284, 22.0001)
 scale = Vector2(3.94808, 4.77157)
 texture = ExtResource("1_ie5ku")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Backgrpund/StaticBody2D"]
+[node name="left" type="CollisionShape2D" parent="Backgrpund/StaticBody2D"]
 position = Vector2(101, 43.0002)
 shape = SubResource("RectangleShape2D_5uoak")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Backgrpund/StaticBody2D"]
+[node name="right" type="CollisionShape2D" parent="Backgrpund/StaticBody2D"]
 position = Vector2(497, 43.0002)
 shape = SubResource("RectangleShape2D_5uoak")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Backgrpund/StaticBody2D"]
-position = Vector2(300, 298.001)
+[node name="bottom" type="CollisionShape2D" parent="Backgrpund/StaticBody2D"]
+position = Vector2(300, 296.001)
 shape = SubResource("RectangleShape2D_pkgbp")
 
 [node name="Camera2D" type="Camera2D" parent="Backgrpund"]
 position = Vector2(-47, 2.53263)
 scale = Vector2(1, 0.844214)
+
+[node name="Area2D" type="Area2D" parent="Backgrpund"]
+position = Vector2(-50, -145.205)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Backgrpund/Area2D"]
+position = Vector2(12, 1.28817e-05)
+shape = SubResource("RectangleShape2D_whbqp")
 
 [node name="Kumo" type="Node2D" parent="." node_paths=PackedStringArray("next_texture")]
 position = Vector2(599, 130)
@@ -252,22 +263,12 @@ offset_bottom = 118.0
 texture = ExtResource("28_hhh2r")
 expand_mode = 1
 
-[node name="Node" type="Node2D" parent="."]
-position = Vector2(580, 202)
-
-[node name="Label" type="Label" parent="."]
-offset_left = 51.0
-offset_top = 16.0
-offset_right = 180.0
-offset_bottom = 63.0
-theme_override_font_sizes/font_size = 34
-text = "R:RESET"
-
 [node name="Button" type="Button" parent="."]
 offset_left = 927.0
 offset_top = 413.0
 offset_right = 1059.0
 offset_bottom = 494.0
+theme_override_fonts/font = ExtResource("31_1vslw")
 theme_override_font_sizes/font_size = 32
 text = "送信"
 
@@ -284,19 +285,23 @@ ranks = [NodePath("Label"), NodePath("Label2"), NodePath("Label3")]
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("31_1vslw")
 theme_override_font_sizes/font_size = 49
 text = "1位"
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("31_1vslw")
 theme_override_font_sizes/font_size = 49
 text = "2位"
 
 [node name="Label3" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("31_1vslw")
 theme_override_font_sizes/font_size = 49
 text = "3位"
 
+[connection signal="area_entered" from="Backgrpund/Area2D" to="Kumo" method="_on_border_entered"]
 [connection signal="timeout" from="Kumo/Timer" to="Kumo" method="_on_timer_timeout"]
 [connection signal="timeout" from="Kumo/Detection_timer" to="Kumo" method="_on_detection_timer_timeout"]
 [connection signal="button_down" from="Button" to="Button/firebase" method="_on_button_down"]

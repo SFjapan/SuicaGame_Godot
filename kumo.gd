@@ -1,3 +1,4 @@
+#途中からv4.2->4.3に変えたので変なとこあっても許してちょ
 extends Node2D
 
 class_name Kumo
@@ -15,7 +16,7 @@ var fruit:Fruits	#現在のフルーツ
 var next_fruits:Fruits	#次のフルーツ
 var next_index:int = randi_range(0,4)	#次のフルーツのインデックス
 var score:int = 0	#score
-var isGame:bool = true	#ゲーム判定
+var isGame:bool = false #ゲーム判定
 var isDetection:bool = false	#衝突判定
 var isDropping:bool = false #現在のフルーツを落とし方どうか
 
@@ -23,10 +24,6 @@ var isDropping:bool = false #現在のフルーツを落とし方どうか
 @onready var backgrpund = $"../Backgrpund"
 @onready var firebase = $"../Button/firebase"
 
-
-func _ready():
-	get_next_fruits()
-	get_random_fruits()		
 	
 func _physics_process(delta):
 	if not isGame:
@@ -48,18 +45,20 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		if isGame and (event.position.x < 841 and event.position.x > 482):
 			position.x = event.position.x
+
 				
 #ランダムで次のフルーツ選択			
 func get_next_fruits():
-	next_index = 1 # randi_range(0,4)
+	next_index = randi_range(0,4)
+	if next_fruits:
+		next_fruits.queue_free()
+		next_fruits = null
 	next_fruits = Fruits[next_index].instantiate() as Fruits
 	var sprite = next_fruits.get_child(0) as Sprite2D
 	next_texture.texture = sprite.texture
 	
 #ランダムで選んだフルーツを出す	
 func get_random_fruits():
-	if fruit is Fruits:
-		return
 	next_fruits = null
 	fruit = Fruits[next_index].instantiate() as Fruits
 	fruit.rig.gravity_scale = 0
@@ -80,6 +79,7 @@ func spawn_fruits(index:int,pos:Vector2):
 		get_parent().add_child(d)
 		d.position = pos
 		d.isDroped = true
+		d.area_col.disabled = false
 		detection_timer.start()		
 		
 #落とす		
@@ -91,8 +91,9 @@ func drop():
 	fruit.rig.gravity_scale = 1.0
 	fruit.col.disabled = false
 	fruit.isDroped = true
-	fruit.reparent(get_parent())	
-	fruit = null
+	fruit.area_col.disabled = false
+	fruit.reparent(get_parent())
+	fruit = null	
 	timer.start()
 	
 #リセット	
@@ -119,8 +120,6 @@ func reset():
 	get_next_fruits()
 	get_random_fruits()	
 	
-	
-	
 #時間経過で次のフルーツ選択	
 func _on_timer_timeout():
 	get_random_fruits()
@@ -131,6 +130,14 @@ func _on_timer_timeout():
 func _on_detection_timer_timeout():
 	isDetection = false
 	pass # Replace with function body.
+	
+#ボーダー
+func _on_border_entered(area: Area2D) -> void:
+	var parent = area.get_parent()
+	if parent is Fruits:
+		if parent.isDroped and parent.isTouched:
+			isGame = false
+	pass # Replace with function body.	
 
 #スコアが送られたら再開
 func _on_firebase_complete_send():

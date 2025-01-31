@@ -18,7 +18,7 @@ func update_ranking():
 	count = 0
 	doc = await collection.get_doc("VRCpHQUdu2HiHd3IJU8J")
 	var ranking:Array = doc["document"]["scores"]["arrayValue"]["values"]
-	ranking.sort_custom(func(a,b):return a["integerValue"] > b["integerValue"])
+	ranking.sort_custom(func(a,b):return int(a["integerValue"]) > int(b["integerValue"]))
 	for i in ranking:
 		if count > 2:
 			break
