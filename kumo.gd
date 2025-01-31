@@ -108,6 +108,8 @@ func reset():
 	await get_tree().process_frame
 	
 	# 変数をリセット
+	if fruit and fruit is Fruits:
+		fruit.queue_free()
 	fruit = null
 	next_fruits = null
 	score = 0
@@ -115,7 +117,7 @@ func reset():
 	isDetection = false
 	isDropping = false
 	isGame = true
-
+	timer.stop()
 	# 新しいフルーツを設定
 	get_next_fruits()
 	get_random_fruits()	
@@ -142,4 +144,9 @@ func _on_border_entered(area: Area2D) -> void:
 #スコアが送られたら再開
 func _on_firebase_complete_send():
 	reset()
+	pass # Replace with function body.
+
+#送信ボタンを押したらゲーム終了する
+func _on_button_down() -> void:
+	isGame = false
 	pass # Replace with function body.

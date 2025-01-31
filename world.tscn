@@ -304,6 +304,7 @@ text = "3位"
 [connection signal="area_entered" from="Backgrpund/Area2D" to="Kumo" method="_on_border_entered"]
 [connection signal="timeout" from="Kumo/Timer" to="Kumo" method="_on_timer_timeout"]
 [connection signal="timeout" from="Kumo/Detection_timer" to="Kumo" method="_on_detection_timer_timeout"]
+[connection signal="button_down" from="Button" to="Kumo" method="_on_button_down"]
 [connection signal="button_down" from="Button" to="Button/firebase" method="_on_button_down"]
 [connection signal="complete_send" from="Button/firebase" to="Kumo" method="_on_firebase_complete_send"]
 [connection signal="complete_send" from="Button/firebase" to="VBoxContainer" method="_on_firebase_complete_send"]
