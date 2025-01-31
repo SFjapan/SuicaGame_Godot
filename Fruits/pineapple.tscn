@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://desdk73dgwiyd"]
+
+[ext_resource type="Script" path="res://Fruits/Fruits.gd" id="1_vv7u8"]
+[ext_resource type="Texture2D" uid="uid://regiqhv7o0bb" path="res://Assets/img/pineapple.png" id="2_vxseq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b3ica"]
+
+[node name="Fruits" type="RigidBody2D" node_paths=PackedStringArray("rig", "col")]
+mass = 3.9
+script = ExtResource("1_vv7u8")
+index = 8
+score = 310
+rig = NodePath(".")
+col = NodePath("CollisionShape2D")
+
+[node name="Pineapple" type="Sprite2D" parent="."]
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("2_vxseq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4.6, 4.6)
+shape = SubResource("CircleShape2D_b3ica")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(4.6, 4.6)
+shape = SubResource("CircleShape2D_b3ica")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

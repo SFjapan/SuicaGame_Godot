@@ -1,0 +1,258 @@
+[gd_scene load_steps=31 format=3 uid="uid://cm2b1yeyq8ycl"]
+
+[ext_resource type="Texture2D" uid="uid://bptt6c7m5gbu4" path="res://Assets/img/box.png" id="1_ie5ku"]
+[ext_resource type="Texture2D" uid="uid://c8lj2dxwobdu7" path="res://Assets/img/backgrpund.png" id="1_rmhle"]
+[ext_resource type="PackedScene" uid="uid://bl3gqce7vnpqq" path="res://Fruits/cherry.tscn" id="2_ljy5f"]
+[ext_resource type="Script" path="res://kumo.gd" id="3_uq23u"]
+[ext_resource type="Texture2D" uid="uid://dekttgbojkuaa" path="res://Assets/img/kumo.png" id="4_hfbkc"]
+[ext_resource type="PackedScene" uid="uid://bipvw5itmtxrv" path="res://Fruits/grape.tscn" id="5_6jqfd"]
+[ext_resource type="PackedScene" uid="uid://dmtjrx48nayjk" path="res://Fruits/strawberry.tscn" id="6_d1swc"]
+[ext_resource type="PackedScene" uid="uid://ch5ca1uecma3h" path="res://Fruits/dekopon.tscn" id="6_jdlc1"]
+[ext_resource type="PackedScene" uid="uid://cm6qtashxtxnp" path="res://Fruits/kaki.tscn" id="7_7bdin"]
+[ext_resource type="PackedScene" uid="uid://6c6hl12b113f" path="res://Fruits/apple.tscn" id="9_5s732"]
+[ext_resource type="PackedScene" uid="uid://bxx1am68fo047" path="res://Fruits/nasi.tscn" id="10_8qf0q"]
+[ext_resource type="PackedScene" uid="uid://bxuytd4i602wc" path="res://Fruits/peach.tscn" id="10_37eb8"]
+[ext_resource type="PackedScene" uid="uid://desdk73dgwiyd" path="res://Fruits/pineapple.tscn" id="11_36igp"]
+[ext_resource type="PackedScene" uid="uid://o0utclyc14jh" path="res://Fruits/melon.tscn" id="12_ppr3c"]
+[ext_resource type="PackedScene" uid="uid://bmvvrtsn1xlfb" path="res://Fruits/watermelon.tscn" id="13_vctrq"]
+[ext_resource type="Script" path="res://Score.gd" id="17_op5ry"]
+[ext_resource type="Texture2D" uid="uid://b322t7xsck7ws" path="res://Assets/img/cherry.png" id="18_pw5s2"]
+[ext_resource type="Texture2D" uid="uid://ba0owpojwxif8" path="res://Assets/img/strawberry.png" id="19_u1tqe"]
+[ext_resource type="Texture2D" uid="uid://bwvafrlbcvl67" path="res://Assets/img/grape.png" id="20_osqy2"]
+[ext_resource type="Texture2D" uid="uid://bfliffc7pxsuc" path="res://Assets/img/dekopon.png" id="21_yql3y"]
+[ext_resource type="Texture2D" uid="uid://dq1y2iamtpf4f" path="res://Assets/img/kaki.png" id="22_5qjrf"]
+[ext_resource type="Texture2D" uid="uid://d1gc58geeac2h" path="res://Assets/img/apple.png" id="23_6rokc"]
+[ext_resource type="Texture2D" uid="uid://cgmblqy38gf8j" path="res://Assets/img/nasi.png" id="24_julid"]
+[ext_resource type="Texture2D" uid="uid://dgsxytrdk7rxq" path="res://Assets/img/peach.png" id="25_2o8t0"]
+[ext_resource type="Texture2D" uid="uid://regiqhv7o0bb" path="res://Assets/img/pineapple.png" id="26_utyee"]
+[ext_resource type="Texture2D" uid="uid://c25v0a8fcn7pf" path="res://Assets/img/melon.png" id="27_nj8ef"]
+[ext_resource type="Texture2D" uid="uid://id16y13tofl5" path="res://Assets/img/watermelon.png" id="28_hhh2r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uoak"]
+size = Vector2(22, 526.001)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkgbp"]
+size = Vector2(411, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0eogm"]
+size = Vector2(604, 20)
+
+[node name="World" type="Node2D"]
+position = Vector2(-1, 1)
+
+[node name="Backgrpund" type="Sprite2D" parent="."]
+position = Vector2(625, 321)
+scale = Vector2(1, 1.18453)
+texture = ExtResource("1_rmhle")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Backgrpund"]
+position = Vector2(-337, 7.59791)
+scale = Vector2(1, 0.844214)
+
+[node name="Box" type="Sprite2D" parent="Backgrpund/StaticBody2D"]
+position = Vector2(284, 22.0001)
+scale = Vector2(3.94808, 4.77157)
+texture = ExtResource("1_ie5ku")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Backgrpund/StaticBody2D"]
+position = Vector2(101, 43.0002)
+shape = SubResource("RectangleShape2D_5uoak")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Backgrpund/StaticBody2D"]
+position = Vector2(497, 43.0002)
+shape = SubResource("RectangleShape2D_5uoak")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Backgrpund/StaticBody2D"]
+position = Vector2(299.5, 297)
+shape = SubResource("RectangleShape2D_pkgbp")
+
+[node name="border" type="Area2D" parent="Backgrpund"]
+position = Vector2(-48, -27.0149)
+scale = Vector2(1, 0.844214)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Backgrpund/border"]
+position = Vector2(9, 0)
+shape = SubResource("RectangleShape2D_0eogm")
+
+[node name="Camera2D" type="Camera2D" parent="Backgrpund"]
+position = Vector2(-47, 2.53263)
+scale = Vector2(1, 0.844214)
+
+[node name="Kumo" type="Node2D" parent="Backgrpund" node_paths=PackedStringArray("next_texture")]
+position = Vector2(24, -156.18)
+scale = Vector2(1, 0.844214)
+script = ExtResource("3_uq23u")
+Fruits = Array[PackedScene]([ExtResource("2_ljy5f"), ExtResource("6_d1swc"), ExtResource("5_6jqfd"), ExtResource("6_jdlc1"), ExtResource("7_7bdin"), ExtResource("9_5s732"), ExtResource("10_8qf0q"), ExtResource("10_37eb8"), ExtResource("11_36igp"), ExtResource("12_ppr3c"), ExtResource("13_vctrq")])
+next_texture = NodePath("../../Sprite2D")
+
+[node name="Kumo" type="Sprite2D" parent="Backgrpund/Kumo"]
+texture = ExtResource("4_hfbkc")
+
+[node name="spwanPos" type="Node2D" parent="Backgrpund/Kumo"]
+position = Vector2(-74, 33)
+
+[node name="Timer" type="Timer" parent="Backgrpund/Kumo"]
+one_shot = true
+
+[node name="Detection_timer" type="Timer" parent="Backgrpund/Kumo"]
+wait_time = 0.05
+one_shot = true
+
+[node name="Score" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 77.0
+offset_top = 156.0
+offset_right = 117.0
+offset_bottom = 196.0
+
+[node name="Label" type="Label" parent="Score"]
+layout_mode = 0
+offset_right = 51.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 54
+text = "SCORE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Score"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 96.0
+offset_right = 175.0
+offset_bottom = 141.0
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("17_op5ry")
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(96, 96)
+offset_left = 916.0
+offset_top = 59.0
+offset_right = 1044.0
+offset_bottom = 187.0
+texture = ExtResource("18_pw5s2")
+expand_mode = 1
+
+[node name="進化の輪" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 931.0
+offset_top = 223.0
+offset_right = 971.0
+offset_bottom = 263.0
+
+[node name="cherry" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = 60.0
+offset_top = 53.0
+offset_right = 126.0
+offset_bottom = 119.0
+texture = ExtResource("18_pw5s2")
+expand_mode = 1
+
+[node name="strawberry" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = 119.0
+offset_top = 112.0
+offset_right = 185.0
+offset_bottom = 178.0
+texture = ExtResource("19_u1tqe")
+expand_mode = 1
+
+[node name="grape" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = 160.0
+offset_top = 188.0
+offset_right = 226.0
+offset_bottom = 254.0
+texture = ExtResource("20_osqy2")
+expand_mode = 1
+
+[node name="dekopon" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = 142.0
+offset_top = 257.0
+offset_right = 208.0
+offset_bottom = 323.0
+texture = ExtResource("21_yql3y")
+expand_mode = 1
+
+[node name="kaki" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = 91.0
+offset_top = 315.0
+offset_right = 157.0
+offset_bottom = 381.0
+texture = ExtResource("22_5qjrf")
+expand_mode = 1
+
+[node name="apple" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 334.0
+offset_right = 83.0
+offset_bottom = 400.0
+texture = ExtResource("23_6rokc")
+expand_mode = 1
+
+[node name="nasi" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = -47.0
+offset_top = 315.0
+offset_right = 19.0
+offset_bottom = 381.0
+texture = ExtResource("24_julid")
+expand_mode = 1
+
+[node name="peach" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = -97.0
+offset_top = 258.0
+offset_right = -31.0
+offset_bottom = 324.0
+texture = ExtResource("25_2o8t0")
+expand_mode = 1
+
+[node name="pineapple" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = -113.0
+offset_top = 189.0
+offset_right = -47.0
+offset_bottom = 255.0
+texture = ExtResource("26_utyee")
+expand_mode = 1
+
+[node name="melon" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = -83.0
+offset_top = 118.0
+offset_right = -17.0
+offset_bottom = 184.0
+texture = ExtResource("27_nj8ef")
+expand_mode = 1
+
+[node name="watermelon" type="TextureRect" parent="進化の輪"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 0
+offset_left = -38.0
+offset_top = 52.0
+offset_right = 28.0
+offset_bottom = 118.0
+texture = ExtResource("28_hhh2r")
+expand_mode = 1
+
+[connection signal="timeout" from="Backgrpund/Kumo/Timer" to="Backgrpund/Kumo" method="_on_timer_timeout"]
+[connection signal="timeout" from="Backgrpund/Kumo/Detection_timer" to="Backgrpund/Kumo" method="_on_detection_timer_timeout"]

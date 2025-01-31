@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxx1am68fo047"]
+
+[ext_resource type="Script" path="res://Fruits/Fruits.gd" id="1_modnn"]
+[ext_resource type="Texture2D" uid="uid://cgmblqy38gf8j" path="res://Assets/img/nasi.png" id="2_fta13"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b3ica"]
+
+[node name="Fruits" type="RigidBody2D" node_paths=PackedStringArray("rig", "col")]
+mass = 3.0
+script = ExtResource("1_modnn")
+index = 6
+score = 250
+rig = NodePath(".")
+col = NodePath("CollisionShape2D")
+
+[node name="Nasi" type="Sprite2D" parent="."]
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("2_fta13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3.8, 3.8)
+shape = SubResource("CircleShape2D_b3ica")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(3.8, 3.8)
+shape = SubResource("CircleShape2D_b3ica")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch5ca1uecma3h"]
+
+[ext_resource type="Script" path="res://Fruits/Fruits.gd" id="1_f1rl7"]
+[ext_resource type="Texture2D" uid="uid://bfliffc7pxsuc" path="res://Assets/img/dekopon.png" id="2_5ieh8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b3ica"]
+
+[node name="Fruits" type="RigidBody2D" node_paths=PackedStringArray("rig", "col")]
+position = Vector2(-2, 0)
+mass = 1.9
+script = ExtResource("1_f1rl7")
+index = 3
+score = 150
+rig = NodePath(".")
+col = NodePath("CollisionShape2D")
+
+[node name="Dekopon" type="Sprite2D" parent="."]
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("2_5ieh8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_b3ica")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_b3ica")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
