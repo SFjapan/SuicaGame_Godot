@@ -1,4 +1,4 @@
 Suica game with godot v4.3<br/>
-firebase firestore
-addons/godot-firebase/.env
-export web
+firebase firestore<br/>
+addons/godot-firebase/.env<br/>
+export web<br/>
